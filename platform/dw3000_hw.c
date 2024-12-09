@@ -34,7 +34,7 @@ int dw3000_hw_init(void)
 {
 	/* Reset */
 	if (conf.gpio_reset.port) {
-		gpio_pin_configure_dt(&conf.gpio_reset, GPIO_INPUT);
+		gpio_pin_configure_dt(&conf.gpio_reset, GPIO_OUTPUT_INACTIVE);
 		LOG_INF("RESET on %s pin %d", conf.gpio_reset.port->name,
 				conf.gpio_reset.pin);
 	}
@@ -127,7 +127,7 @@ void dw3000_hw_reset()
 
 	gpio_pin_configure_dt(&conf.gpio_reset, GPIO_OUTPUT_ACTIVE);
 	k_msleep(1); // 10 us?
-	gpio_pin_configure_dt(&conf.gpio_reset, GPIO_INPUT);
+	gpio_pin_configure_dt(&conf.gpio_reset, GPIO_OUTPUT_INACTIVE);
 	k_msleep(2);
 }
 
